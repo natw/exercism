@@ -5,9 +5,8 @@ module WordCount (wordCount) where
   import qualified Data.Text as T
 
   wordCount :: String -> (M.Map String Int)
-  wordCount sentence = 
-    foldl (\acc word -> M.insertWith (+) word 1 acc) M.empty words
-    where words = splitAndClean sentence
+  wordCount = 
+    foldl (\acc word -> M.insertWith (+) word 1 acc) M.empty . splitAndClean
 
   splitAndClean :: String -> [String]
   splitAndClean = 
