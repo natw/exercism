@@ -4,7 +4,8 @@ toRNA :: String -> String
 toRNA = fmap complement
 
 complement :: Char -> Char
-complement 'G' = 'C'
-complement 'C' = 'G'
-complement 'T' = 'A'
-complement 'A' = 'U'
+complement nuc = case nuc of 'G' -> 'C'
+                             'C' -> 'G'
+                             'T' -> 'A'
+                             'A' -> 'U'
+                             _ -> error "unrecognized nucleotide"
