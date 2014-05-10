@@ -2,7 +2,7 @@ module Beer (sing, verse) where
 
 sing :: Int -> Int -> String
 sing a b = 
-  unlines (map verse (reverse [b..a]))
+  unlines (map verse (enumFromThenTo a (a-1) b))
 
 verse :: Int -> String
 verse num
