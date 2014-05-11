@@ -2,14 +2,18 @@ module WordCount (wordCount) where
 
   import qualified Data.Map.Strict as M
   import Data.Char
-  import qualified Data.Text as T
+  import Data.List (foldl')
+  import Data.List.Split (splitWhen)
 
   wordCount :: String -> (M.Map String Int)
   wordCount = 
-    foldl (\acc word -> M.insertWith (+) word 1 acc) M.empty . splitAndClean
+    foldl' predicate M.empty . splitAndClean
+    where predicate = (\acc word -> M.insertWith (+) word 1 acc)
 
   splitAndClean :: String -> [String]
   splitAndClean = 
-    filter (not . null) . fmap toLowerAlphaNum . split
-    where toLowerAlphaNum = fmap toLower . filter isAlphaNum
-          split = fmap T.unpack . T.split (\c -> elem c " _,;.") . T.pack
+    stripEmpty . split . lower
+    where
+      stripEmpty = filter (not . null)
+      split = splitWhen $ not . isAlphaNum
+      lower = fmap toLower
