@@ -8,7 +8,7 @@ import Data.List.Split (wordsBy)
 wordCount :: String -> (M.Map String Int)
 wordCount =
   foldl' countWord M.empty . splitAndClean
-  where countWord = (\acc word -> M.insertWith (+) word 1 acc)
+  where countWord acc word = M.insertWith (+) word 1 acc
 
 splitAndClean :: String -> [String]
 splitAndClean =
