@@ -9,7 +9,7 @@ anagramsFor word =
 
 isAnagram :: String -> String -> Bool
 isAnagram word1 word2 =
-  lword1 /= lword2 && sort lword1 == sort lword2
+  (\w1 w2 -> w1 /= w2 && sort w1 == sort w2) lword1 lword2
   where
     lowercase = fmap toLower
     lword1 = lowercase word1
