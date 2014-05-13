@@ -4,10 +4,13 @@ import Data.Char (toLower)
 import Data.List (sort)
 
 anagramsFor :: String -> [String] -> [String]
-anagramsFor word wordList = 
-  filter (\a -> isAnagram word a) wordList
+anagramsFor word =
+  filter (\a -> isAnagram word a)
 
+isAnagram :: String -> String -> Bool
 isAnagram word1 word2 =
-  lowercase word1 /= lowercase word2 &&
-  sort (lowercase word1) == sort (lowercase word2)
-  where lowercase = fmap toLower
+  lword1 /= lword2 && sort lword1 == sort lword2
+  where
+    lowercase = fmap toLower
+    lword1 = lowercase word1
+    lword2 = lowercase word2
