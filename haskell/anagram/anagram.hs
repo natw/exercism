@@ -5,7 +5,7 @@ import Data.List (sort)
 
 anagramsFor :: String -> [String] -> [String]
 anagramsFor word =
-  filter (\a -> isAnagram word a)
+  filter $ isAnagram word
 
 isAnagram :: String -> String -> Bool
 isAnagram word1 word2 =
