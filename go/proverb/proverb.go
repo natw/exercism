@@ -1,15 +1,30 @@
-// This is a "stub" file.  It's a little start on your solution.
-// It's not a complete solution though; you have to write some code.
-
-// Package proverb should have a package comment that summarizes what it's about.
-// https://golang.org/doc/effective_go.html#commentary
 package proverb
+
+import "fmt"
 
 // Proverb should have a comment documenting it.
 func Proverb(rhyme []string) []string {
-	// Write some code here to pass the test suite.
-	// Then remove all the stock comments.
-	// They're here to help you get started but they only clutter a finished solution.
-	// If you leave them in, reviewers may protest!
-	return []string{}
+	pairs := windows(rhyme)
+	proverb := []string{}
+	for _, pair := range pairs {
+		s := fmt.Sprintf("For want of a %s the %s was lost.", pair[0], pair[1])
+		proverb = append(proverb, s)
+	}
+	if len(rhyme) >= 1 {
+		last := fmt.Sprintf("And all for the want of a %s.", rhyme[0])
+		proverb = append(proverb, last)
+	}
+	return proverb
+}
+
+func windows(items []string) [][]string {
+	var ret [][]string
+	if len(items) <= 1 {
+		return ret
+	}
+	ret = make([][]string, len(items)-1)
+	for i := 0; i < len(items)-1; i++ {
+		ret[i] = items[i : i+2]
+	}
+	return ret
 }
